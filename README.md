@@ -12,7 +12,7 @@ To run the script you need Read & Write permission on InDesign's "applicationpre
 ```
 
 1. To grant Read & Write access right click on "applicationpreference.plist" and select "Get Info".
-2. Click on the padlock in the bottom left had side to allow changes.
+2. Click on the padlock at the bottom right hand side to allow changes.
 3. Click the plus (+) icon.
 4. Select your username and click on "Select".
 5. Click on the menu under "Privilege" next to your username and select "Read & Write".
