@@ -15,7 +15,7 @@ if ($.os.slice(0,3) == "Mac") { // Only runs on macOS
     var userAbort = false;
     
     if (!appPreferenceFull.exists) { // can the applicationpreference.plist be found, if not, get the InDesing install location!
-        appPreferenceFolder = Folder.selectDialog();
+        appPreferenceFolder = Folder.selectDialog("Please select the folder where this version of InDesign is located");
         if (appPreferenceFolder !== null) {
             appPreferenceFull = File(appPreferenceFolder + PREF_STATIC);
             app.insertLabel("appPreferenceFolder_ST54RETY54", appPreferenceFull);
