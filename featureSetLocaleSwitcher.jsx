@@ -1,7 +1,7 @@
 //
 // INDESIGN FEATURE SET LOCALE SWITCHER by JACK WEEKES
 // 
-// VERSION 1.5 
+// VERSION 1.5.1
 //
 // Script UI built using: ScriptUI Dialog Builder at: https://scriptui.joonas.me/
 // Based on the findings of Dr Ken Lunde at: https://medium.com/@ken.lunde/adobe-indesign-tips-japanese-cjk-functionality-english-ui-redux-539528e295c6
@@ -35,14 +35,11 @@ if ($.os.slice(0,3) == "Mac") { // Only runs on macOS
             if (app.documents.length == 0) {
                 configXML = new XML(configXML);
                 var XML_Val;
-                            //check if both are in file needed.
                 if (configXML.dict.string > 0) {
                     XML_Val = configXML.dict.string;
                 } else if (configXML.dict.integer > 0) {
                     XML_Val = configXML.dict.integer;
-                } else {
-                    // rebuild the file automatically?
-                }
+                } 
                 dialogShow();
             } else {
                 alert("Please close all documents and try again.");
