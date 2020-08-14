@@ -1,7 +1,7 @@
 //
 // INDESIGN FEATURE SET LOCALE SWITCHER by JACK WEEKES
 // 
-// VERSION 1.1 
+// VERSION 1.5 
 //
 // Script UI built using: ScriptUI Dialog Builder at: https://scriptui.joonas.me/
 // Based on the findings of Dr Ken Lunde at: https://medium.com/@ken.lunde/adobe-indesign-tips-japanese-cjk-functionality-english-ui-redux-539528e295c6
@@ -34,6 +34,15 @@ if ($.os.slice(0,3) == "Mac") { // Only runs on macOS
         } else {
             if (app.documents.length == 0) {
                 configXML = new XML(configXML);
+                var XML_Val;
+                            //check if both are in file needed.
+                if (configXML.dict.string > 0) {
+                    XML_Val = configXML.dict.string;
+                } else if (configXML.dict.integer > 0) {
+                    XML_Val = configXML.dict.integer;
+                } else {
+                    // rebuild the file automatically?
+                }
                 dialogShow();
             } else {
                 alert("Please close all documents and try again.");
@@ -70,17 +79,17 @@ if ($.os.slice(0,3) == "Mac") { // Only runs on macOS
         var rJPN = pFeatureSet.add("radiobutton", undefined, undefined, {name: "rJPN"}); 
             rJPN.text = "Japanese"; 
         
-            if (configXML.dict.string == 256) { // ROMAN
+            if (XML_Val == 256) { // ROMAN
                 rROM.enabled = false;
                 rRTL.enabled = true;
                 rRTL.value = true;
                 rJPN.enabled = true;
-            } else if (configXML.dict.string == 257) { // JPN
+            } else if (XML_Val == 257) { // JPN
                 rROM.enabled = true;
                 rROM.value = true;
                 rRTL.enabled = true;
                 rJPN.enabled = false;
-            } else if (configXML.dict.string == 259) { // RTL
+            } else if (XML_Val == 259) { // RTL
                 rROM.enabled = true;
                 rROM.value = true;
                 rRTL.enabled = false;
@@ -109,7 +118,7 @@ if ($.os.slice(0,3) == "Mac") { // Only runs on macOS
         var cancelButton1 = grpButtons1.add("button", undefined, undefined, {name: "Cancel"}); 
             cancelButton1.text = "Cancel"; 
             cancelButton1.preferredSize.width = 70; 
-        
+
         var updateLocale = dialog.show();
             if (updateLocale == 1) {
                 var proceedYesReally = confirm("Are you sure you want to change InDesign's feature set locale? \n\nIf you proceed InDesign will quit.\n\n You will need to relauch InDesign manually.", true);
@@ -126,9 +135,16 @@ if ($.os.slice(0,3) == "Mac") { // Only runs on macOS
     }
     
     function saveLocale(ver) {
-        configXML.dict.string = ver;
+        var plistBase = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\n";
+        
+        if (configXML.dict.string > 0) {
+            configXML.dict.string = ver;
+        } else if (configXML.dict.integer > 0) {
+            configXML.dict.integer = ver;
+        } 
+
         appPreferenceFull.open("W");
-        appPreferenceFull.write(configXML.toXMLString());
+        appPreferenceFull.write(plistBase + configXML.toXMLString());
         appPreferenceFull.close();
         app.quit();
     }
