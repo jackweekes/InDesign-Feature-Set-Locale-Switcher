@@ -18,4 +18,4 @@ To run the script you need Read & Write permission on InDesign's "applicationpre
 5. Click on the menu under "Privilege" next to your username and select "Read & Write".
 6. Done, you can close the "Get Info" window and start InDesign.
 
-For a backgound on how this script works, check out Dr Ken Lunde's post on [Medium](https://medium.com/@ken.lunde/adobe-indesign-tips-japanese-cjk-functionality-english-ui-redux-539528e295c6?sk=6e588ba09a5f14d025ff53e6d886547b).
+For a background on how this script works, check out Dr Ken Lunde's post on [Medium](https://medium.com/@ken.lunde/adobe-indesign-tips-japanese-cjk-functionality-english-ui-redux-539528e295c6?sk=6e588ba09a5f14d025ff53e6d886547b).
