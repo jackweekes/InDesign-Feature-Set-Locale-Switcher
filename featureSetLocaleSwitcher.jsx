@@ -1,12 +1,12 @@
 //
 // INDESIGN FEATURE SET LOCALE SWITCHER by JACK WEEKES
 // 
-// VERSION 1.5.1
+// VERSION 1.6
 //
 // Script UI built using: ScriptUI Dialog Builder at: https://scriptui.joonas.me/
 // Based on the findings of Dr Ken Lunde at: https://medium.com/@ken.lunde/adobe-indesign-tips-japanese-cjk-functionality-english-ui-redux-539528e295c6
 //
-
+const appVersion = "1.6";
 
 if ($.os.slice(0,3) == "Mac") { // Only runs on macOS
     var PREF_STATIC = "/Presets/applicationpreferences/indesign/applicationpreference.plist" // Location of the applicationpreference.plist file, not including the path to the application
@@ -27,10 +27,13 @@ if ($.os.slice(0,3) == "Mac") { // Only runs on macOS
         var configXML = appPreferenceFull.read();
         appPreferenceFull.close();
     }
-    
+const permissionIssue = "Unable to edit the following file:\n\n" + appPreferenceFull + "\n\nEnsure you have write access and try again.";
+
+var originalConfigXML = configXML; //Used to see if the the plist was written to
+
     if (!userAbort) {
         if (configXML == "") {
-            alert("Unable to edit \"applicationpreference.plist\", ensure you have write access and try again."); //Please set permissions 
+            alert("Error 001\n\n" + permissionIssue); //Please set permissions 
         } else {
             if (app.documents.length == 0) {
                 configXML = new XML(configXML);
@@ -51,7 +54,7 @@ if ($.os.slice(0,3) == "Mac") { // Only runs on macOS
         // DIALOG
         // ======
         var dialog = new Window("dialog"); 
-            dialog.text = "Feature Set Locale Switcher "; 
+            dialog.text = "Feature Set Locale Switcher (" + appVersion + ")"; 
             dialog.orientation = "row"; 
             dialog.alignChildren = ["center","center"]; 
             dialog.spacing = 10; 
@@ -118,7 +121,7 @@ if ($.os.slice(0,3) == "Mac") { // Only runs on macOS
 
         var updateLocale = dialog.show();
             if (updateLocale == 1) {
-                var proceedYesReally = confirm("Are you sure you want to change InDesign's feature set locale? \n\nIf you proceed InDesign will quit.\n\n You will need to relauch InDesign manually.", true);
+                var proceedYesReally = confirm("Are you sure you want to change InDesign's feature set locale? \n\nIf you proceed InDesign will quit.\n\n You will need to relaunch InDesign manually.", true);
                 if (proceedYesReally == true) {
                     if (rROM.value == true) { // ROMAN
                         saveLocale(256);  
@@ -139,11 +142,19 @@ if ($.os.slice(0,3) == "Mac") { // Only runs on macOS
         } else if (configXML.dict.integer > 0) {
             configXML.dict.integer = ver;
         } 
+        var newPlistConfigXML = plistBase + configXML.toXMLString();
 
         appPreferenceFull.open("W");
-        appPreferenceFull.write(plistBase + configXML.toXMLString());
+        appPreferenceFull.write(newPlistConfigXML);
         appPreferenceFull.close();
-        app.quit();
+
+        if (newPlistConfigXML == originalConfigXML) {
+            app.quit();
+        } else {
+            alert("Error 002\n\n" + permissionIssue);
+        }
+
+        
     }
 } else {
     alert("This script only works with macOS, Sorry!");
