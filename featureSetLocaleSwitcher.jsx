@@ -1,12 +1,12 @@
 //
 // INDESIGN FEATURE SET LOCALE SWITCHER by JACK WEEKES
 // 
-// VERSION 2.1
+// VERSION 2.2
 //
 // Script UI built using: ScriptUI Dialog Builder at: https://scriptui.joonas.me/
 // Based on the findings of Dr Ken Lunde at: https://medium.com/@ken.lunde/adobe-indesign-tips-japanese-cjk-functionality-english-ui-redux-539528e295c6
 //
-const appVersion = "2.1";
+const appVersion = "2.2";
 
 if ($.os.slice(0,3) == "Mac") { // macOS
     var PREF_STATIC = "/Presets/applicationpreferences/indesign/applicationpreference.plist" // Location of the applicationpreference.plist file, not including the path to the application
@@ -101,7 +101,6 @@ if ($.os.slice(0,3) == "Mac") { // macOS
                 default:
                    XML_Val = 256;
 } 
-            XML_Val
             dialogShow();
         } else {
             alert("Please close all documents and try again.");
