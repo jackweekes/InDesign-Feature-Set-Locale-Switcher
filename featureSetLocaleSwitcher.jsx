@@ -33,9 +33,6 @@ if ($.os.slice(0,3) == "Mac") { // macOS
     const myFileNameRoman = myAppVersion + "_roman.reg";
     const myFileNameRtL = myAppVersion + "_rtl.reg";
     const myFileNameCJK = myAppVersion + "_cjk.reg";
-    const myLocaleNumberRoman = 0;
-    const myLocaleNumberRtL = 0;
-    const myLocaleNumberCJK = 0;
     const myRegData = "Windows Registry Editor Version 5.00\n\n[HKEY_LOCAL_MACHINE\\SOFTWARE\\Adobe\\InDesign\\" + myAppVersion + ".0]\n\"Feature Set Locale Setting\"=dword:";
     const myRegDataRoman = myRegData + "00000100"; // 256
     const myRegDataRtL = myRegData + "00000103";   // 259
