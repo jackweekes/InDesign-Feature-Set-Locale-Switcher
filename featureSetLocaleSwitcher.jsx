@@ -1,12 +1,12 @@
 //
 // INDESIGN FEATURE SET LOCALE SWITCHER by JACK WEEKES
 // 
-// VERSION 2.0
+// VERSION 2.1
 //
 // Script UI built using: ScriptUI Dialog Builder at: https://scriptui.joonas.me/
 // Based on the findings of Dr Ken Lunde at: https://medium.com/@ken.lunde/adobe-indesign-tips-japanese-cjk-functionality-english-ui-redux-539528e295c6
 //
-const appVersion = "2.0";
+const appVersion = "2.1";
 
 if ($.os.slice(0,3) == "Mac") { // macOS
     var PREF_STATIC = "/Presets/applicationpreferences/indesign/applicationpreference.plist" // Location of the applicationpreference.plist file, not including the path to the application
@@ -212,10 +212,12 @@ if ($.os.slice(0,3) == "Mac") { // macOS
             appPreferenceFull.write(newPlistConfigXML);
             appPreferenceFull.close();
 
-            if (newPlistConfigXML == originalConfigXML) {
+            if (newPlistConfigXML != originalConfigXML) {
                 app.quit();
             } else {
                 alert("Error 002\n\n" + permissionIssue);
+                alert(newPlistConfigXML);
+                alert(originalConfigXML);
             }
         } else if ($.os.slice(0,3) == "Win") { // Windows
             var myErrorRegCan = true;
