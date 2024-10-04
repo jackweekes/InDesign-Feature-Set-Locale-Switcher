@@ -216,8 +216,6 @@ if ($.os.slice(0,3) == "Mac") { // macOS
                 app.quit();
             } else {
                 alert("Error 002\n\n" + permissionIssue);
-                alert(newPlistConfigXML);
-                alert(originalConfigXML);
             }
         } else if ($.os.slice(0,3) == "Win") { // Windows
             var myErrorRegCan = true;
