@@ -1,15 +1,25 @@
-# InDesign-Feature-Set-Locale-Switcher-macOS
-This script enables quick switching between Roman, right to left and Japanese feature sets within InDesign on macOS.
+# InDesign Feature Set Locale Switcher
+This script enables quick switching between Roman, right to left and Japanese feature sets within InDesign.
 
-I recommend installing this script into the Community Scripts folder in InDesign to ensure it is available within all feature sets, the default location for InDesign 2020 is:
+I recommend installing this script into the Community Scripts folder in InDesign to ensure it is available within all feature sets, the default location for InDesign 2024 is:
+
+macOS: 
 ```
-/Applications/Adobe InDesign 2020/Scripts/Community/Scripts Panel
+/Applications/Adobe InDesign 2024/Scripts/Community/Scripts Panel
+```
+Windows: 
+```
+C:\Program Files\Adobe\Adobe InDesign 2024\Scripts\Community\Scripts Panel
 ```
 
-To run the script you need Read & Write permission on InDesign's "applicationpreference.plist" file, the default location for InDesign 2020 is: 
+## macOS specific instructions 
+
+To run the script on macOS you need Read & Write permission on InDesign's "applicationpreference.plist" file, the default location for InDesign 2024 is: 
 ```
-/Applications/Adobe InDesign 2020/Presets/applicationpreferences/indesign/
+/Applications/Adobe InDesign 2024/Presets/applicationpreferences/indesign/
 ```
+
+
 
 1. To grant Read & Write access right click on "applicationpreference.plist" and select "Get Info".
 2. Click on the padlock at the bottom right hand side to allow changes.
